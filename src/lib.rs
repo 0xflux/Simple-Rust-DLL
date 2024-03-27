@@ -26,8 +26,9 @@ fn DllMain(hmod_instance: HINSTANCE, dw_reason: u32, _: usize) -> i32 {
     1
 }
 
-/// Entrypoint to the actual implant once execution goes into DLL_PROCESS_ATTACH. Think of this as
-/// calling a function to start something from main().
+/// Entrypoint to the actual implant to be spawned as a new thread ffom DLL_PROCESS_ATTACH.
+/// This should help to prevent problems whereby a LoaderLock interferes with our implant.<br/><br/>
+/// Think of this as calling a function to start something from main().
 #[no_mangle]
 unsafe extern "system" fn attach(_lp_thread_param: *mut c_void) -> u32 {
     MessageBoxA(None, s!("Hello from Rust DLL"), s!("Hello from Rust DLL"), MB_OK);
