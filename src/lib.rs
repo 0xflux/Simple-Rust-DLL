@@ -53,7 +53,7 @@ fn spawn_thread(lib_to_load: LoadModule) {
             LoadModule::StartImplant => thread_start = Some(attach)
         }
 
-        // create a thread to unload the DLL from the current process
+        // create a thread with a function pointer to the region of the program we want to execute.
         let _thread_handle = CreateThread(
             None,
             0,
